@@ -53,7 +53,7 @@
                             </li>
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="pwd.html" class="btn btn-default btn-flat">修改密码</a>
+                                    <a href="{{url_for('admin.pwd')}}" class="btn btn-default btn-flat">修改密码</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{url_for('admin.logout')}}" class="btn btn-default btn-flat">退出系统</a>
@@ -112,40 +112,6 @@
 <script src="//cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
 <script src="{{url_for('static',filename='admin/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
 <script src="{{url_for('static',filename='admin/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js')}}" charset="UTF-8"></script>
-{% block js%}
-<script src="{{url_for('static',filename='js/echarts.min.js')}}"></script>
-<script>
-    var myChart = echarts.init(document.getElementById('meminfo'));
-    option = {
-		backgroundColor: "white",
-		tooltip: {
-			formatter: "{a} <br/>{b} : {c}%"
-		},
-		toolbox: {
-			feature: {
-				restore: {},
-				saveAsImage: {}
-			}
-		},
-		series: [{
-			name: '内存使用率',
-			type: 'gauge',
-			detail: {
-				formatter: '{value}%'
-			},
-			data: [{
-				value: 50,
-				name: '内存使用率'
-			}]
-		}]
-	};
-    setInterval(function () {
-        option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
-        myChart.setOption(option, true);
-    },2000);
-
-</script>
-{% endblock %}
-
+{% block js%}{% endblock %}
 </body>
 </html>
