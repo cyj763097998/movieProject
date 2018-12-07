@@ -1,7 +1,15 @@
 #coding:utf8
 from flask import  Flask,render_template
+from flask_sqlalchemy import SQLAlchemy
+
 app =  Flask(__name__)
 app.debug = True
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:@127.0.0.1:3306/db_movie"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+
+db = SQLAlchemy(app)
+
+
 from app.home import home as home_blueprint
 from app.admin import admin as admin_blueprint
 

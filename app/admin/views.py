@@ -53,6 +53,7 @@ def preview_add():
 def preview_list():
     return render_template("admin/preview_list.html")
 
+
 @admin.route("/user/list/")
 def user_list():
     return render_template("admin/user_list.html")
@@ -62,22 +63,57 @@ def user_list():
 def user_view():
     return render_template("admin/user_view.html")
 
+
 @admin.route("/comment/list/")
 def comment_list():
     return render_template("admin/comment_list.html")
+
 
 @admin.route("/moviecol/list/")
 def moviecol_list():
     return render_template("admin/moviecol_list.html")
 
+
 @admin.route("/oplog/list/")
 def oplog_list():
     return render_template("admin/oplog_list.html")
+
 
 @admin.route("/adminloginlog/list/")
 def adminloginlog_list():
     return render_template("admin/adminloginlog_list.html")
 
+
 @admin.route("/userloginlog/list/")
 def userloginlog_list():
     return render_template("admin/userloginlog_list.html")
+
+
+@admin.route("/auth/add/")
+def auth_add():
+    return render_template("admin/auth_add.html")
+
+
+@admin.route("/auth/list/")
+def auth_list():
+    return render_template("admin/auth_list.html")
+
+
+@admin.route("/role/add/")
+def role_add():
+    return render_template("admin/role_add.html")
+
+
+@admin.route("/role/list/")
+def role_list():
+    return render_template("admin/role_list.html")
+
+
+@admin.route("/admin/add/")
+def admin_add():
+    return render_template("admin/admin_add.html")
+
+
+@admin.route("/admin/list/")
+def admin_list():
+    return render_template("admin/admin_list.html")

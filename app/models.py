@@ -1,13 +1,7 @@
 #coding:utf8
-from flask import  Flask
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from app import db
 
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:123456@127.0.0.1:3306/db_movie"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-
-db = SQLAlchemy(app)
 
 #会员
 class User(db.Model):
@@ -156,11 +150,12 @@ if __name__ ==  "__main__":
     #db.create_all()
     '''
         role = Role(
-        name="超级管理员",
+        name=u"超级管理员",
         auths=""
         )
         db.session.add(role)
         db.session.commit()
+    '''
     '''
     from werkzeug.security import generate_password_hash
     admin = Admin(
@@ -171,3 +166,4 @@ if __name__ ==  "__main__":
     )
     db.session.add(admin)
     db.session.commit()
+    '''
