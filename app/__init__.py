@@ -6,7 +6,7 @@ app =  Flask(__name__)
 app.debug = True
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:@127.0.0.1:3306/db_movie"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-
+app.config['SECRET_KEY'] = 'b0ba9e899e254f6eaed382f19af1915e'
 db = SQLAlchemy(app)
 
 
