@@ -1,6 +1,9 @@
 #coding:utf8
 from flask import  Flask,render_template
 from flask_sqlalchemy import SQLAlchemy
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 app =  Flask(__name__)
 app.debug = True
