@@ -2,7 +2,9 @@
 from . import admin
 from flask import render_template, url_for, redirect
 from app.admin.forms import LoginForm
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 @admin.route("/")
 @admin.route("/index/")
