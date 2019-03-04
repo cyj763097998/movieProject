@@ -126,6 +126,11 @@ class Admin(db.Model):
     addtime = db.Column(db.DateTime, index=True, default=datetime.now)
     def __repr__(self):
         return "<Admin %r>" % self.name
+    def check_pwd(self,pwd):
+        """ 验证密码一致性，正确返回true 错误返回false"""
+        from werkzeug.security import check_password_hash
+        print pwd,self.pwd
+        return check_password_hash(self.pwd,pwd)
 #管理员登录日志
 class Adminlog(db.Model):
     __tablename__ = "adminlog"

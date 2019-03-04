@@ -18,23 +18,34 @@
         <a href=""><b>微电影管理系统</b></a>
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg"></p>
-        <form action="" method="post" id="form-data">
+        {% for mes in get_flashed_messages() %}
+            <p class="login-box-msg" style="color:red;"> {{ mes }}</p>
+        {% endfor %}
+        <form method="POST" id="form-data">
             <div class="form-group has-feedback">
                 {{ form.account }}
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                <div class="col-md-12" id="input_user"></div>
+                {% for err in form.account.errors %}
+                <div class="col-md-12" >
+                    <font style="color:red">{{ err }}</font>
+                </div>
+                {% endfor %}
             </div>
             <div class="form-group has-feedback">
                 {{ form.pwd }}
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                <div class="col-md-12" id="input_pwd"></div>
+                {% for err in form.pwd.errors %}
+                <div class="col-md-12" >
+                    <font style="color:red">{{ err }}</font>
+                </div>
+                {% endfor %}
             </div>
             <div class="row">
                 <div class="col-xs-8">
                 </div>
                 <div class="col-xs-4">
                     {{ form.submit }}
+                    {{form.csrf_token}}
                 </div>
             </div>
         </form>
