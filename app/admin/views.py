@@ -1,8 +1,8 @@
 # coding:utf8
 from . import admin
 from flask import render_template, url_for, redirect,flash,session,request
-from app.admin.forms import LoginForm,TagForm
-from app.models import Admin,Tag
+from app.admin.forms import LoginForm,TagForm,MovieForm
+from app.models import Admin,Tag,Movie
 from functools import wraps
 from app import db
 
@@ -35,7 +35,7 @@ def login():
         return redirect(request.args.get("next") or url_for("admin.index"))
     return render_template("admin/login.html", form=form)
 
-
+#退出登录
 @admin.route("/logout/")
 @admin_login_req
 def logout():
@@ -48,7 +48,7 @@ def logout():
 def pwd():
     return render_template("admin/pwd.html")
 
-
+#添加标签
 @admin.route("/tag/add/",methods=["GET","POST"])
 @admin_login_req
 def tag_add():
@@ -68,7 +68,7 @@ def tag_add():
         return redirect(url_for("admin.tag_add"))
     return render_template("admin/tag_add.html",form=form)
 
-
+#标签列表
 @admin.route("/tag/list/<int:page>/",methods=["get"])
 @admin_login_req
 def tag_list(page=None):
@@ -80,6 +80,7 @@ def tag_list(page=None):
 
     return render_template("admin/tag_list.html",page_data=page_data)
 
+#编辑标签
 @admin.route("/tag/edit/<int:id>/",methods=["GET","POST"])
 @admin_login_req
 def tag_edit(id=None):
@@ -98,6 +99,7 @@ def tag_edit(id=None):
         return redirect(url_for("admin.tag_edit",id=id))
     return render_template("admin/tag_edit.html",form=form,tag=tag)
 
+#删除标签
 @admin.route("/tag/del/<int:id>/",methods=["get"])
 @admin_login_req
 def tag_del(id=None):
@@ -107,10 +109,31 @@ def tag_del(id=None):
     flash("删除标签成功！","ok")
     return redirect(url_for("admin.tag_list",page=1))
 
-@admin.route("/movie/add/")
+#添加电影
+@admin.route("/movie/add/",methods=["GET","POST"])
 @admin_login_req
 def movie_add():
-    return render_template("admin/movie_add.html")
+    form = MovieForm()
+    if form.validate_on_submit():
+        data = form.data
+        movie = Movie(
+            title = data["title"],
+            url = url,
+            info = data["info"],
+            logo = logo,
+            star = data["star"],
+            playnum = 0,
+            commentnum = 0,
+            tag_id = data["tag_id"],
+            area = data["area"],
+            lenth = data["lenth"],
+            release_time = data["release_time"]
+        )
+        db.session.add(movie)
+        db.session.commit()
+        flash("添加电影成功！","ok")
+        return redirect(url_for("admin.movie_add"))
+    return render_template("admin/movie_add.html",form=form)
 
 
 @admin.route("/movie/list/")
