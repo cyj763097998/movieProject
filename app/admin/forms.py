@@ -1,6 +1,6 @@
 # coding:utf8
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField,FileField,TextAreaField,SelectField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Admin
 
@@ -56,18 +56,64 @@ class TagForm(FlaskForm):
         render_kw={
             "class": "form-control",
             "placeholder": "请输入标签名称！",
-            "required":False
+            "required": False
         }
     )
     submit = SubmitField(
         "添加",
-        render_kw = {
+        render_kw={
             "class": "btn btn-primary"
         }
     )
     submit_edit = SubmitField(
         "编辑",
-        render_kw = {
+        render_kw={
             "class": "btn btn-primary"
         }
     )
+
+class movieForm(FlaskForm):
+    """电影"""
+    title = StringField(
+        label="片名",
+        validators = [
+            DataRequired("请输入片名！")
+        ],
+        description = "片名",
+        render_kw = {
+            "class": "form-control",
+            "placeholder": "请输入片名！",
+            "required": False
+        }
+    )
+    url = FileField(
+        label="片名",
+        validators=[
+            DataRequired("请输入片名！")
+        ],
+        description="片名",
+    )
+    info = TextAreaField(
+        label="介绍",
+        validators=[
+            DataRequired("请输入介绍！")
+        ],
+        description="介绍",
+        render_kw={
+            "class": "form-control",
+            "rows":10
+            "required": False
+        }
+    )
+    logo = FileField(
+        label = "封面",
+        validators = [
+             DataRequired("请输入封面！")
+        ],
+        description = "封面",
+    )
+    star
+    tag_id
+    area
+    release_time
+    lenth
