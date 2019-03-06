@@ -2,7 +2,6 @@
 from datetime import datetime
 from app import db
 
-
 #会员
 class User(db.Model):
     __tablename__ = "user"
