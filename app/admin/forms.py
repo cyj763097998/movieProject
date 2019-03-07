@@ -4,9 +4,8 @@ from wtforms import StringField, PasswordField, SubmitField,FileField,TextAreaFi
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Admin,Tag
 
-tags = Tag.query.all()
-print tags
-print "test"
+
+
 class LoginForm(FlaskForm):
     """管理员登录表单"""
     account = StringField(
@@ -133,13 +132,19 @@ class MovieForm(FlaskForm):
             DataRequired("请输入标签！")
         ],
         coerce=int,
-        choices=[(v.id, v.name) for v in tags],
+        #choices=[(v.id, v.name) for v in Tag.query.order_by(Tag.id.desc()).all()],
         description="标签",
         render_kw={
-            "class": "form-control",
+            "class": "form-control select2",
             "required": False
         }
     )
+
+    # 解决标签(tag_id)下拉时数据与标签列表不同步
+    def __init__(self, *args, **kwargs):
+        super(MovieForm, self).__init__(*args, **kwargs)
+        self.tag_id.choices = [(v.id, v.name) for v in Tag.query.all()]
+
     area = StringField(
         label="地区",
         validators = [
